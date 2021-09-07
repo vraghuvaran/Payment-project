@@ -1,0 +1,11 @@
+<label [for]="schema.ControlName" class="form-label">{{schema.labelName}}</label>
+<select [id]="schema.ControlName" [name]="schema.ControlName"
+ [(ngModel)]="schema.selectedValue"
+ class="form-select">
+    <option *ngFor="let c of schema.messages; let i = index
+            " [value]="" 
+            [selected]="schema.selectedValue"
+            (change)="handleDropdownchange(i)"
+        >{{c.messagecode}}
+    </option>
+</select>

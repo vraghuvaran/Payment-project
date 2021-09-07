@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule } from '@angular/common/http';
 import { TransferComponent } from './transfer/transfer.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { Message } from './models/message';
 
 const appRoutes = [
   
@@ -21,7 +23,8 @@ const appRoutes = [
     HeaderComponent,
     NavitemsComponent,
     LoginComponent,
-    TransferComponent
+    TransferComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,
