@@ -14,6 +14,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { Message } from './models/message';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditprofileComponent } from './dashboard/editprofile/editprofile.component';
+import { ViewprofileComponent } from './dashboard/viewprofile/viewprofile.component';
 
 const appRoutes = [
   
@@ -28,7 +29,8 @@ const appRoutes = [
     TransferComponent,
     DropdownComponent,
     DashboardComponent,
-    EditprofileComponent
+    EditprofileComponent,
+    ViewprofileComponent
   ],
   imports: [
     BrowserModule,
