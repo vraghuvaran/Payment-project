@@ -12,6 +12,8 @@ import {HttpClientModule } from '@angular/common/http';
 import { TransferComponent } from './transfer/transfer.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { Message } from './models/message';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditprofileComponent } from './dashboard/editprofile/editprofile.component';
 
 const appRoutes = [
   
@@ -24,7 +26,9 @@ const appRoutes = [
     NavitemsComponent,
     LoginComponent,
     TransferComponent,
-    DropdownComponent
+    DropdownComponent,
+    DashboardComponent,
+    EditprofileComponent
   ],
   imports: [
     BrowserModule,

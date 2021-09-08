@@ -15,6 +15,10 @@ export class HeaderComponent implements OnInit {
     {
       name: 'Transfer',
       link: 'transfer'
+    },
+    {
+      name: 'Dashboard',
+      link: 'dashboard'
     }
   ]
   constructor() { 
