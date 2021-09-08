@@ -9,6 +9,8 @@ import { Message } from '../models/message';
 })
 export class DropdownComponent implements OnInit {
 
+
+  index: any
   @Input()
   schema:any
  
@@ -32,10 +34,17 @@ export class DropdownComponent implements OnInit {
 
   }
 
-  handleDropdownchange(index: any) {
+  handleDropdownchange(event: any) {
 
-       this.handlechanges.emit(this.schema.messages[index])
-       console.log(1)
+       let i: number;
+       this.schema.messages.forEach((element: any,index: any)=>{
+         if(element.messagecode==event.target.value) {
+           i = index;
+           this.handlechanges.emit(this.schema.messages[i])
+          
+          }
+       })
+      
   }
 
 }

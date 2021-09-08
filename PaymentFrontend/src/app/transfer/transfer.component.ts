@@ -15,7 +15,7 @@ export class TransferComponent implements OnInit {
   allMessages: Message[]=[]
   dropdown: any
   transferfees: number = 0
-  message: any
+  message?: Message
   transfertypecode: any
   eligible: boolean = false
   constructor(private messageservice: MessageserviceService,
@@ -141,7 +141,7 @@ export class TransferComponent implements OnInit {
 
 
   handleChange(event: any){
-      console.log(event)
+      this.message = event
   }
 
 
