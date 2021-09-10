@@ -1,6 +1,9 @@
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Bank } from '../models/bank';
+import { Customer } from '../models/customer';
+import { CustomerService } from '../services/customer.service';
 import { MessageserviceService } from '../services/messageservice.service';
 import { TransactionService } from '../services/transaction.service';
 
@@ -13,6 +16,7 @@ export class TransferComponent implements OnInit {
 
   transferForm: FormGroup
   allMessages: Message[]=[]
+  sender?: Customer
   dropdown: any
   transferfees: number = 0
   message?: Message
@@ -20,6 +24,7 @@ export class TransferComponent implements OnInit {
   eligible: boolean = false
   constructor(private messageservice: MessageserviceService,
     private transactionservice: TransactionService, 
+    private customerservice: CustomerService
     ) {
     
     this.dropdown = {
@@ -49,6 +54,17 @@ export class TransferComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+    this.customerservice.getCustomer().subscribe((data: any)=>{
+
+      this.sender = data.customer;
+      
+
+    },(errror)=>{
+
+
+    })
 
     this.transactionservice.getTransferFee().subscribe((data)=>{
 
@@ -88,50 +104,57 @@ export class TransferComponent implements OnInit {
 
     let customerid: string ='';
    
-    this.transactionservice.checkEligibility(customerid,this.transferForm.controls['receiveraccounholdernumber'].value)
+    this.transactionservice.checkEligibility(this.sender?.customerid!,this.transferForm.controls['receiveraccounholdernumber'].value)
     .subscribe((data)=>{
 
       this.eligible = true;
 
+
     },(error)=>{
 
       this.eligible  = false;
+
+      window.alert(error.error[0])
+
 
     })
 
 
     let transferdata ={
       customer: {
-        customerid: ''
+        customerid: this.sender?.customerid
       },
       senderbic: {
-        bic: ''
+        bic: this.sender?.bank.bic
       },
       receiveraccounholdernumber: {
         customerid: this.transferForm.controls['receiveraccounholdernumber'].value
       },
       receiverbic: {
-        bic: ''
+        bic: this.transferForm.controls['receiverbic'].value
       },
-      transfertypecode: {
-        transfertypecode: ''
-      },
-      message: {
-        messagecode: ''
-      },
+      message: this.message,
+
       currencyamount: this.transferForm.controls['currencyamount'].value
       
     }
 
+
     if(this.eligible){
       this.transactionservice.makeTransaction(transferdata).subscribe((data)=>{
 
-        alert('Transaction successfull');
+        
+        window.alert('Transaction successfull');
   
   
       },(error)=>{
   
-  
+         if(error.status>=400 &&error.status<500){
+           window.alert(error.message)
+         }
+         else
+          window.alert('Something went wrong. Please try after sometime')
+
   
       })
     }

@@ -1,11 +1,13 @@
+import { Bank } from "./bank";
+
 export class Customer{
-    constructor(private customerid: string,
-        private accountholdername: string,
-        overdraftflag: number,
-        clearbalance: number,
-        customeraddress: string,
-        customercity: string,
-        customertype: string,
-        bic: string){
+    constructor(public customerid: string,
+        public accountholdername: string,
+        public overdraftflag: number,
+        public clearbalance: number,
+        public customeraddress: string,
+        public customercity: string,
+        public customertype: string,
+        public bank: Bank){
     }
 }

@@ -39,16 +39,17 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.controls['password'].value
     }
 
-    // console.log(data)
     this.loginservice.checkAuth(data)
-    .subscribe((data)=>{
+    .subscribe((data: any)=>{
         
-        console.log(data)
-        this.router.navigate(['/transfer'])
+        sessionStorage.setItem('token',data.jwt);
+        this.router.navigate(['/dashboard'])
 
     },(error)=>{
 
-
+        if(error.status==403){
+          window.alert("invalid username or password")
+        }
 
     })
     

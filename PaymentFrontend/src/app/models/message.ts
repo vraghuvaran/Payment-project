@@ -1,5 +1,5 @@
 export class Message{
-    constructor(private messagecode: string, private instruction: string) {
+    constructor(public messagecode: string, public instruction: string) {
 
     }
 }

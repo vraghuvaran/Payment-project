@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {url} from '../constants'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LoginserviceService {
 
   constructor(private http: HttpClient) {
@@ -22,9 +24,14 @@ export class LoginserviceService {
 
   checkAuth(data: any){
 
-     return this.http.post(url,data);
+     return this.http.post(url+'authenticate',data);
 
-    // return this.http.get('http://localhost:8080/bank/ABBLINBBXXX')
+  }
+
+  isauthenticate() {
+
+    let user = sessionStorage.getItem('token')
+    return user!==null
 
   }
 
