@@ -1,6 +1,7 @@
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Bank } from '../models/bank';
 import { Customer } from '../models/customer';
 import { CustomerService } from '../services/customer.service';
@@ -24,7 +25,8 @@ export class TransferComponent implements OnInit {
   eligible: boolean = false
   constructor(private messageservice: MessageserviceService,
     private transactionservice: TransactionService, 
-    private customerservice: CustomerService
+    private customerservice: CustomerService,
+    private router: Router
     ) {
     
     this.dropdown = {
@@ -145,6 +147,10 @@ export class TransferComponent implements OnInit {
 
         
         window.alert('Transaction successfull');
+
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/transfer']);
+        });
   
   
       },(error)=>{

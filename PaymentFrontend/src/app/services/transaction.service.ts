@@ -25,6 +25,8 @@ export class TransactionService {
 
   makeTransaction(data: any){
 
+    console.log('hello')
+
     return this.http.post(url+'transaction',data, {headers: this.headers})
   }
 

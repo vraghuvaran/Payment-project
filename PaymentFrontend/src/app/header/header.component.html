@@ -6,6 +6,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarColor01" fgid="19187">
         <ul class="navbar-nav me-auto" fgid="19193">
+          <li class="nav-item" fgid="19245">
+            <a class="nav-link" style="cursor: pointer;" routerLink="login" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}" 
+            fgid="19251" *ngIf="!token">Login</a>
+        </li>
+        <li class="nav-item" fgid="19245">
+          <a class="nav-link" style="cursor: pointer;" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}" 
+          fgid="19251" (click)="onLogout()" *ngIf="token">Logout</a>
+      </li>
            <app-navitems *ngFor="let item of itemslist" [item]="item"></app-navitems>
         </ul>    
       </div>
