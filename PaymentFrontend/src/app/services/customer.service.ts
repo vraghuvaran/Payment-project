@@ -23,5 +23,9 @@ export class CustomerService {
     return this.http.get(url+'customeruser/getuser', {headers: this.headers})
   }
 
+  updateCustomre(data: any) {
+    return this.http.patch(url+'customers',data,{headers: this.headers})
+  }
+
 
 }

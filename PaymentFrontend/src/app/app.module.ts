@@ -16,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditprofileComponent } from './dashboard/editprofile/editprofile.component';
 import { ViewprofileComponent } from './dashboard/viewprofile/viewprofile.component';
 import { TopcustomersComponent } from './dashboard/topcustomers/topcustomers.component';
+import { TransactionhistoryComponent } from './dashboard/transactionhistory/transactionhistory.component';
 
 const appRoutes = [
   
@@ -32,7 +33,8 @@ const appRoutes = [
     DashboardComponent,
     EditprofileComponent,
     ViewprofileComponent,
-    TopcustomersComponent
+    TopcustomersComponent,
+    TransactionhistoryComponent
   ],
   imports: [
     BrowserModule,

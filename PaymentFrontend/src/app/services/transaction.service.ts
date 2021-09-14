@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import {url} from '../constants'
+import { Transaction } from '../models/Transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +37,10 @@ export class TransactionService {
     // params = params.append('sendercustomerid',sendercustomerid)
     // params = params.append('receivercustomerid',receivercustomerid)
     return this.http.get(url+'transaction/eligibilitycheck/'+sendercustomerid+'/'+receivercustomerid,{headers: this.headers})
+  }
+
+
+  gettranshistory(customerid: string): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(url+'transaction/gettransaction/'+customerid,{headers: this.headers})
   }
 }
