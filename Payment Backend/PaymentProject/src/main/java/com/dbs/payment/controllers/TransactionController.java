@@ -1,15 +1,22 @@
 package com.dbs.payment.controllers;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +38,7 @@ import com.dbs.payment.service.CustomerService;
 import com.dbs.payment.service.MessageService;
 import com.dbs.payment.service.TransactionService;
 import com.dbs.payment.service.TransferTypesService;
+import com.dbs.payment.util.Permutation;
 
 @RestController
 @CrossOrigin
@@ -130,9 +138,30 @@ public class TransactionController {
 	}
 	
 	
-	public static boolean verifyinSDNlist(String receivername) {
+	public static boolean verifyinSDNlist(String name) throws FileNotFoundException {
 		
-		return false;
+		String[] l = name.strip().split(" ");
+
+		List<String> permList = Permutation.findPermutations(l, ' ');
+		String regexp = String.join("|", permList);
+		File file = ResourceUtils.getFile("classpath:sdnlist.txt");
+
+		Scanner fileScanner = new Scanner(file);
+
+		boolean matchFound = false;
+
+		Pattern pattern = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
+		Matcher matcher = null;
+		while (fileScanner.hasNextLine()) {
+			String line = fileScanner.nextLine();
+			matcher = pattern.matcher(line);
+			if (matcher.find()) {
+				matchFound = true;
+				break;
+			}
+		}
+
+		return matchFound;
 		
 	}
 	
